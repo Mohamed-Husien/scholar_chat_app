@@ -57,7 +57,7 @@ class RegisterPage extends StatelessWidget {
               Container(
                 height: 20,
               ),
-              const CustomElevationButton(buttonText: 'Sign In'),
+              const CustomElevationButton(buttonText: 'Log In'),
               Container(
                 height: 10,
               ),
@@ -70,7 +70,9 @@ class RegisterPage extends StatelessWidget {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
                     child: const Text(
                       ' Login.',
                       style: TextStyle(

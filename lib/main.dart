@@ -1,4 +1,5 @@
 import 'package:chat_app/pages/login_page.dart';
+import 'package:chat_app/pages/register_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,8 +11,12 @@ class ChatApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(),
+    return MaterialApp(
+      routes: {
+        'LogInPage': (context) => const LoginPage(),
+        'RegisterPage': (context) => const RegisterPage(),
+      },
+      initialRoute: 'LogInPage',
     );
   }
 }
