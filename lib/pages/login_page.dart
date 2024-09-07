@@ -1,3 +1,4 @@
+import 'package:chat_app/constants.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
@@ -5,11 +6,11 @@ import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
-
+  static String id = 'LogInPage';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xff2b475e),
+      backgroundColor: kPrimaryColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -72,7 +73,7 @@ class LoginPage extends StatelessWidget {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, 'RegisterPage');
+                      Navigator.pushNamed(context, RegisterPage.id);
                     },
                     child: const Text(
                       ' Register.',
