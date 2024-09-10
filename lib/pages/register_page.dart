@@ -13,22 +13,30 @@ class RegisterPage extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Column(
+          child: ListView(
             children: [
-              const Spacer(
-                flex: 1,
+              const SizedBox(
+                height: 75,
               ),
-              Image.asset('assets/images/scholar.png'),
-              const Text(
-                'Scholar Chat',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontFamily: 'Pacifico',
+              Image.asset(
+                'assets/images/scholar.png',
+                height: 100,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              const Center(
+                child: Text(
+                  'Scholar Chat',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontFamily: 'Pacifico',
+                  ),
                 ),
               ),
-              const Spacer(
-                flex: 2,
+              const SizedBox(
+                height: 75,
               ),
               const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -43,29 +51,29 @@ class RegisterPage extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              const SizedBox(
                 height: 10,
               ),
               CustomTextField(
                 hientText: 'Email',
               ),
-              Container(
+              const SizedBox(
                 height: 10,
               ),
               CustomTextField(
                 hientText: 'Password',
               ),
-              Container(
+              const SizedBox(
                 height: 20,
               ),
               const CustomElevationButton(buttonText: 'Log In'),
-              Container(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
                   const Text(
-                    'Already have an account?',
+                    'Already have an account ',
                     style: TextStyle(
                       color: Colors.white,
                     ),
