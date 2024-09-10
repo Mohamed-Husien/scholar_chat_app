@@ -57,13 +57,13 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hientText: 'Email',
               ),
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextField(
                 hientText: 'Password',
               ),
               const SizedBox(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({super.key, this.hientText});
-  String? hientText;
+  const CustomTextField({super.key, required this.hientText});
+  final String hientText;
   @override
   Widget build(BuildContext context) {
     return TextField(
