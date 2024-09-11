@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/helper/show_snack_bar_function.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
 import 'package:chat_app/widgets/custom_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -79,30 +80,18 @@ class RegisterPage extends StatelessWidget {
                 buttonText: 'Register',
                 onTap: () async {
                   try {
-                    UserCredential user = await FirebaseAuth.instance
-                        .createUserWithEmailAndPassword(
-                            email: email!, password: password!);
+                    await createUserMethod();
                   } on FirebaseAuthException catch (e) {
                     if (e.code == 'weak-password') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('The password provided is too weak.'),
-                        ),
-                      );
+                      showSnachBarMethod(
+                          context, 'The password provided is too weak.');
                     } else if (e.code == 'email-already-in-use') {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content:
-                              Text('The email already exists for that email.'),
-                        ),
-                      );
+                      showSnachBarMethod(
+                          context, 'The email already exists for that email.');
                     }
                   }
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Your register done successfully. '),
-                    ),
-                  );
+                  showSnachBarMethod(
+                      context, 'Your register done successfully. ');
                 },
               ),
               const SizedBox(
@@ -137,5 +126,10 @@ class RegisterPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> createUserMethod() async {
+    UserCredential user = await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email!, password: password!);
   }
 }
