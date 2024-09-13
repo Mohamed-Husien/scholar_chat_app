@@ -9,9 +9,9 @@ class CustomElevationButton extends StatelessWidget {
     return ElevatedButton(
       style: ButtonStyle(
         minimumSize:
-            MaterialStateProperty.all<Size>(const Size(double.infinity, 50)),
-        backgroundColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.pressed)) {
+            WidgetStateProperty.all<Size>(const Size(double.infinity, 50)),
+        backgroundColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.pressed)) {
             return const Color(0xff2b475e); // Color when the button is pressed
           }
           return Colors.white; // Default color
