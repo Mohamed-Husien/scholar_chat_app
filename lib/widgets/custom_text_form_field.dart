@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  CustomTextField(
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField(
       {super.key, required this.hientText, this.onChange, this.validator});
   final String hientText;
-  Function(String)? onChange;
-  String? Function(String?)? validator;
+  final Function(String)? onChange;
+  final String? Function(String?)? validator;
   @override
   Widget build(BuildContext context) {
     return TextFormField(

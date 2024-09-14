@@ -1,7 +1,7 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
-import 'package:chat_app/widgets/custom_text_field.dart';
+import 'package:chat_app/widgets/custom_text_form_field.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -57,13 +57,13 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextFormField(
                 hientText: 'Email',
               ),
               const SizedBox(
                 height: 10,
               ),
-              CustomTextField(
+              const CustomTextFormField(
                 hientText: 'Password',
               ),
               const SizedBox(
