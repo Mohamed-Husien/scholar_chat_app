@@ -1,6 +1,7 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/helper/emial_and_password_validet_function.dart';
 import 'package:chat_app/helper/show_snack_bar_function.dart';
+import 'package:chat_app/pages/chat_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
 import 'package:chat_app/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -108,19 +109,19 @@ class _RegisterPageState extends State<RegisterPage> {
                         setState(() {});
                         try {
                           await createUserMethod();
-                          showSnachBarMethod(
+                          showSnachBarFun(
                               context, 'Your register done successfully. ');
-                          Navigator.pop(context);
+                          Navigator.pushNamed(context, ChatPage.id);
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'weak-password') {
-                            showSnachBarMethod(
+                            showSnachBarFun(
                                 context, 'The password provided is too weak.');
                           } else if (e.code == 'email-already-in-use') {
-                            showSnachBarMethod(context,
+                            showSnachBarFun(context,
                                 'The email already exists for that email.');
                           }
                         } catch (e) {
-                          showSnachBarMethod(context, e.toString());
+                          showSnachBarFun(context, e.toString());
                         }
 
                         isLoading = false;
