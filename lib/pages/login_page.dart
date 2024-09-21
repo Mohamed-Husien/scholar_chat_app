@@ -110,7 +110,8 @@ class _LoginPageState extends State<LoginPage> {
                           showSnachBarFun(
                               context, 'Your log in done successfully. ');
 
-                          Navigator.pushNamed(context, ChatPage.id);
+                          Navigator.pushNamed(context, ChatPage.id,
+                              arguments: email);
                         } on FirebaseAuthException catch (e) {
                           if (e.code == 'wrong-password') {
                             showSnachBarFun(context,

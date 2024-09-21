@@ -35,3 +35,37 @@ class ChatBuble extends StatelessWidget {
     );
   }
 }
+
+class ChatBubleFromFriend extends StatelessWidget {
+  const ChatBubleFromFriend({super.key, required this.messageModel});
+  final MessageModel messageModel;
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        padding: const EdgeInsets.only(
+          left: 8,
+          top: 32,
+          right: 32,
+          bottom: 32,
+        ),
+        margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(32),
+            topRight: Radius.circular(32),
+            bottomLeft: Radius.circular(32),
+          ),
+          color: Color(0xff006D84),
+        ),
+        child: Text(
+          messageModel.message,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
+    );
+  }
+}

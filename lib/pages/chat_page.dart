@@ -1,4 +1,5 @@
 import 'package:chat_app/constants.dart';
+import 'package:chat_app/helper/loading_indicator.dart';
 import 'package:chat_app/models/message_model.dart';
 import 'package:chat_app/widgets/chat_buble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -15,8 +16,9 @@ class ChatPage extends StatelessWidget {
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
+    var id = ModalRoute.of(context)!.settings.arguments;
     return StreamBuilder<QuerySnapshot>(
-        stream: messages.orderBy(kCreatedA).snapshots(),
+        stream: messages.orderBy(kCreatedA, descending: true).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<MessageModel> messageList = snapshot.data!.docs
@@ -46,12 +48,17 @@ class ChatPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
+                        reverse: true,
                         controller: _controller,
                         itemCount: messageList.length,
                         itemBuilder: (context, index) {
-                          return ChatBuble(
-                            messageModel: messageList[index],
-                          );
+                          return messageList[index].id == id
+                              ? ChatBuble(
+                                  messageModel: messageList[index],
+                                )
+                              : ChatBubleFromFriend(
+                                  messageModel: messageList[index],
+                                );
                         }),
                   ),
                   Padding(
@@ -68,11 +75,12 @@ class ChatPage extends StatelessWidget {
                               messages.add({
                                 kMessage: textEditingController.text,
                                 kCreatedA: DateTime.now(),
+                                'id': id,
                               });
                               textEditingController.clear();
                               _controller.animateTo(
-                                _controller.position.maxScrollExtent,
-                                duration: const Duration(seconds: 3),
+                                0,
+                                duration: const Duration(seconds: 2),
                                 curve: Curves.easeIn,
                               );
                             },
@@ -92,7 +100,7 @@ class ChatPage extends StatelessWidget {
               ),
             );
           } else {
-            return const CircularProgressIndicator();
+            return const SkeletonizerIndicator();
           }
         });
   }
