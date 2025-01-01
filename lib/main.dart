@@ -29,7 +29,7 @@ class ChatApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         routes: {
-          LoginPage.id: (context) => const LoginPage(),
+          LoginPage.id: (context) => LoginPage(),
           RegisterPage.id: (context) => const RegisterPage(),
           ChatPage.id: (context) => ChatPage(),
         },
