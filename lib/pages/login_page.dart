@@ -2,6 +2,7 @@ import 'package:chat_app/constants.dart';
 import 'package:chat_app/helper/emial_and_password_validet_function.dart';
 import 'package:chat_app/helper/show_snack_bar_function.dart';
 import 'package:chat_app/pages/chat_page.dart';
+import 'package:chat_app/pages/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/pages/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
@@ -33,6 +34,7 @@ class LoginPage extends StatelessWidget {
           if (state is LoginLoading) {
             isLoading = true;
           } else if (state is LoginSuccess) {
+            BlocProvider.of<ChatCubit>(context).getMessage();
             Navigator.pushNamed(context, ChatPage.id);
             isLoading = false;
           } else if (state is LoginFailure) {

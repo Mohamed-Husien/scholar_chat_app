@@ -1,7 +1,9 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/models/message_model.dart';
+import 'package:chat_app/pages/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/widgets/chat_buble.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 // ignore: must_be_immutable
 class ChatPage extends StatelessWidget {
@@ -13,7 +15,7 @@ class ChatPage extends StatelessWidget {
   final _controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    var id = ModalRoute.of(context)!.settings.arguments;
+    var id = ModalRoute.of(context)!.settings.arguments.toString();
 
     return Scaffold(
       appBar: AppBar(
@@ -36,19 +38,28 @@ class ChatPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-                reverse: true,
-                controller: _controller,
-                itemCount: messageList.length,
-                itemBuilder: (context, index) {
-                  return messageList[index].id == id
-                      ? ChatBuble(
-                          messageModel: messageList[index],
-                        )
-                      : ChatBubleFromFriend(
-                          messageModel: messageList[index],
-                        );
-                }),
+            child: BlocConsumer<ChatCubit, ChatState>(
+              listener: (context, state) {
+                if (state is ChatSuccess) {
+                  messageList = state.messages;
+                }
+              },
+              builder: (context, state) {
+                return ListView.builder(
+                    reverse: true,
+                    controller: _controller,
+                    itemCount: messageList.length,
+                    itemBuilder: (context, index) {
+                      return messageList[index].id == id
+                          ? ChatBuble(
+                              messageModel: messageList[index],
+                            )
+                          : ChatBubleFromFriend(
+                              messageModel: messageList[index],
+                            );
+                    });
+              },
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(16),
@@ -61,6 +72,8 @@ class ChatPage extends StatelessWidget {
                   hintText: 'Send Message',
                   suffixIcon: IconButton(
                     onPressed: () {
+                      BlocProvider.of<ChatCubit>(context).sendMessage(
+                          message: textEditingController.text, email: id);
                       textEditingController.clear();
                       _controller.animateTo(
                         0,
