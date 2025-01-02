@@ -5,6 +5,7 @@ import 'package:chat_app/widgets/chat_buble.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ChatPage extends StatelessWidget {
   ChatPage({super.key});
   static String id = 'ChatPage';
