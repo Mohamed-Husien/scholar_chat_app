@@ -1,8 +1,9 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/helper/emial_and_password_validet_function.dart';
 import 'package:chat_app/helper/show_snack_bar_function.dart';
+import 'package:chat_app/pages/blocs/auth_bloc/auth_bloc.dart';
 import 'package:chat_app/pages/chat_page.dart';
-import 'package:chat_app/pages/cubits/auth_cubit/auth_cubit.dart';
+// import 'package:chat_app/pages/cubits/auth_cubit/auth_cubit.dart';
 import 'package:chat_app/pages/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/pages/register_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
@@ -29,7 +30,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: BlocConsumer<AuthCubit, AuthState>(
+      body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginLoading) {
             isLoading = true;
@@ -114,10 +115,12 @@ class LoginPage extends StatelessWidget {
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
                             isLoading = true;
-
-                            BlocProvider.of<AuthCubit>(context)
-                                .signInUserMethod(
-                                    email: email!, password: password!);
+                            BlocProvider.of<AuthBloc>(context).add(
+                              LoginEvent(
+                                email: email!,
+                                password: password!,
+                              ),
+                            );
                           } else {}
                         },
                       ),
