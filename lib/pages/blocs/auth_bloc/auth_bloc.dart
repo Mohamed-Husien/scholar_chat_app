@@ -8,13 +8,6 @@ part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  @override
-  void onTransition(Transition<AuthEvent, AuthState> transition) {
-    super.onTransition(transition);
-
-    log(transition.toString());
-  }
-
   AuthBloc() : super(AuthInitial()) {
     on<AuthEvent>(
       (event, emit) async {
