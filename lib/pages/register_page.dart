@@ -1,8 +1,8 @@
 import 'package:chat_app/constants.dart';
 import 'package:chat_app/helper/emial_and_password_validet_function.dart';
 import 'package:chat_app/helper/show_snack_bar_function.dart';
+import 'package:chat_app/pages/cubits/auth_cubit/auth_cubit.dart';
 
-import 'package:chat_app/pages/cubits/register_cubit/register_cubit.dart';
 import 'package:chat_app/pages/login_page.dart';
 import 'package:chat_app/widgets/custom_elevation_button.dart';
 import 'package:chat_app/widgets/custom_text_form_field.dart';
@@ -27,7 +27,7 @@ class RegisterPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: kPrimaryColor,
-      body: BlocConsumer<RegisterCubit, RegisterState>(
+      body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is RegisterLoading) {
             isLoading = true;
@@ -116,7 +116,7 @@ class RegisterPage extends StatelessWidget {
                         buttonText: 'Register',
                         onTap: () async {
                           if (formKey.currentState!.validate()) {
-                            BlocProvider.of<RegisterCubit>(context)
+                            BlocProvider.of<AuthCubit>(context)
                                 .createUserMethod(
                                     email: email!, password: password!);
                           } else {}
